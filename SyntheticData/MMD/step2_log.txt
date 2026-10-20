@@ -1,0 +1,70 @@
+============================================================
+Simplified Distribution Analysis
+============================================================
+
+Which step to run?
+1. Word overlap only
+2. Compute embeddings only
+3. Compute MMD only
+4. Load DIMP diagnostics
+5. Generate full report
+Enter step number: [HAMI-core Msg(3454:139895201307712:libvgpu.c:870)]: Initializing.....
+[HAMI-core Msg(3454:139895201307712:libvgpu.c:909)]: Initialized
+
+--- Step 2: Compute Embeddings ---
+============================================================
+Loading Phase 1 DIMP Data
+============================================================
+
+Loading Phase 1 split IDs...
+  Real QC train: 160 IDs
+  Qwen train: 320 IDs
+  Llama train: 320 IDs
+
+Loading Real data (QC train pool only, NO test)...
+  Loaded 160 real samples
+Loading Qwen synthetic data (train split)...
+  Loaded 320 Qwen samples
+Loading Llama synthetic data (train split)...
+  Loaded 320 Llama samples
+
+Computing embeddings for REAL...
+Loading bert-base-uncased...
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 6548.46it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: bert-base-uncased
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Extracting embeddings (pooling=cls)...
+Encoding:   0%|          | 0/5 [00:00<?, ?it/s]Encoding:   0%|          | 0/5 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/root/workspace/SyntheticData/MMD/run_step_by_step.py", line 35, in <module>
+    embeddings_data = compute_and_cache_all_embeddings(
+        all_data,
+        cache_dir=output_dir / "embeddings",
+        force_recompute=False
+    )
+  File "/root/workspace/SyntheticData/MMD/compute_embeddings.py", line 161, in compute_and_cache_all_embeddings
+    embeddings, sample_ids, labels = extract_embeddings(
+                                     ~~~~~~~~~~~~~~~~~~^
+        all_data[source],
+        ^^^^^^^^^^^^^^^^^
+        model_name=model_name,
+        ^^^^^^^^^^^^^^^^^^^^^^
+        pooling=pooling
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/root/workspace/SyntheticData/MMD/compute_embeddings.py", line 68, in extract_embeddings
+    texts = [item['text'] for item in batch]
+             ~~~~^^^^^^^^
+TypeError: string indices must be integers, not 'str'

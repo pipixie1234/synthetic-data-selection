@@ -1,0 +1,31 @@
+# Local checkpoints, caches, and generated experiment artifacts
+cloud/model/
+/CaR-main/
+**/.venv/
+**/venv/
+**/__pycache__/
+**/outputs/
+**/*.log
+**/*.pt
+**/*.pth
+**/*.ckpt
+**/*.safetensors
+**/*.onnx
+**/checkpoint-*/
+**/lightning_logs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+Thumbs.db
+
+# Local environment/configuration and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Editor and OS files
+.vscode/
+.idea/

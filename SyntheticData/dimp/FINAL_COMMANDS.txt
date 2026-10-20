@@ -1,0 +1,124 @@
+=================================================================
+Phase 1 DIMP实验 - 最终运行命令
+=================================================================
+
+已完成的代码模块：
+✓ data_splits.py - 固定数据划分
+✓ qc_consistency_check.py - QC一致性检查
+✓ phase1_trainers.py - CE/Quality/DIMP训练器
+✓ enhanced_diagnostics.py - 增强诊断收集
+✓ run_phase1.py - 主实验运行器
+✓ analyze_phase1.py - 结果分析和Excel生成
+✓ smoke_test_phase1.py - 快速验证
+✓ run_phase1_complete.sh - 一键运行脚本
+
+=================================================================
+运行命令（按顺序执行）
+=================================================================
+
+## 步骤1: 进入目录
+cd /root/workspace/SyntheticData/dimp
+
+## 步骤2: 快速验证（2-3分钟）
+python smoke_test_phase1.py --protocol-dir outputs/phase1_smoke
+
+## 步骤3a: 快速运行Phase 1（3 seeds，30-40分钟）
+python run_phase1.py \
+    --protocol-dir outputs/phase1 \
+    --seeds 42 43 44 \
+    --epochs 3 \
+    --batch-size 16
+
+## 步骤3b: 或完整运行（5 seeds，50-70分钟）
+python run_phase1.py \
+    --protocol-dir outputs/phase1 \
+    --seeds 42 43 44 45 46 \
+    --epochs 3 \
+    --batch-size 16
+
+## 步骤4: 生成Excel报告
+python analyze_phase1.py --protocol-dir outputs/phase1
+
+## 步骤5: 查看结果
+cat outputs/phase1/phase1_analysis.txt
+
+=================================================================
+一键运行（推荐）
+=================================================================
+
+bash run_phase1_complete.sh
+
+=================================================================
+运行的实验（每个seed）
+=================================================================
+
+A1: Real200_CE           - 200个真实样本baseline
+A2: QC-only_160real      - Quality Checker直接测试
+B1: Qwen320_CE           - Qwen合成数据 + CE
+B2: Qwen320_Quality      - Qwen合成数据 + Quality-only
+B3: Qwen320_DIMP         - Qwen合成数据 + DIMP
+C1: Llama320_CE          - Llama合成数据 + CE
+C2: Llama320_Quality     - Llama合成数据 + Quality-only
+C3: Llama320_DIMP        - Llama合成数据 + DIMP
+
+总计：8个实验 × N个seeds
+
+=================================================================
+输出文件
+=================================================================
+
+outputs/phase1/
+├── phase1_results.xlsx           # Excel报告（多sheet）
+├── phase1_analysis.txt           # 统计摘要
+├── all_results.json              # 所有结果JSON
+├── qc_reload_check.json          # QC一致性检查
+├── splits/                       # 固定数据划分
+├── quality_checker/              # QC模型checkpoint
+├── quality_scores/               # 预计算质量分数
+└── {实验名}_seed{N}/
+    ├── results.json              # 实验结果
+    ├── epoch_diagnostics.json    # 每epoch统计
+    ├── classification_report.txt # 分类报告
+    └── diagnostics/              # 详细诊断
+        ├── samples_epoch*.csv    # 每epoch样本诊断
+        ├── class_weight_stats.csv# 按类别统计
+        ├── top20_weights.csv     # 高权重样本
+        └── bottom20_weights.csv  # 低权重样本
+
+=================================================================
+数据划分（固定，所有实验相同）
+=================================================================
+
+Real Train (200): QC训练160 + QC验证40
+Qwen (400): 训练320 + 测试80
+Llama (400): 训练320 + 测试80
+Real Test (400): 从不用于训练
+
+=================================================================
+故障排除
+=================================================================
+
+## CUDA OOM
+python run_phase1.py --batch-size 8
+
+## 重新生成splits
+python run_phase1.py --force-recreate-splits
+
+## 重新训练QC
+python run_phase1.py --force-retrain-qc
+
+## 跳过QC检查
+python run_phase1.py --skip-qc-check
+
+=================================================================
+预期时间
+=================================================================
+
+Smoke test: 2-3分钟
+Phase 1 (3 seeds): 30-40分钟
+Phase 1 (5 seeds): 50-70分钟
+分析生成: <1分钟
+
+总计（3 seeds）: 约35-45分钟
+
+=================================================================

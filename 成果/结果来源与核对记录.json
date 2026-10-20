@@ -1,0 +1,45 @@
+{
+  "sources": [
+    {
+      "key": "topk",
+      "copy": "关键Excel/01_TopK多seed验证.xlsx",
+      "source": "SyntheticData/exp/outputs/curation_validation/e1_e2_validation_results.xlsx",
+      "sha256": "c83ff4d8a2c7ef14f5d658572047b16b2c180380996596db86220656cfb4022b"
+    },
+    {
+      "key": "matrix",
+      "copy": "关键Excel/02_来源兼容性矩阵.xlsx",
+      "source": "SyntheticData/SmaExp/outputs/visualizations/comparison_summary_500_matrix.xlsx",
+      "sha256": "d9f03dfb73e57cb0364cb3c598d9dda2a1651abac8181ab3688d4d489f6d196c"
+    },
+    {
+      "key": "ln",
+      "copy": "关键Excel/03_LN_DSIR与ESS诊断.xlsx",
+      "source": "SyntheticData/DisrTry/outputs/ln_dsir_validation/ln_dsir_results.xlsx",
+      "sha256": "7412dacfe7b42317cc8f4e74c701b285be8e99c522b039cd2b664589a637f34c"
+    },
+    {
+      "key": "car",
+      "copy": "关键Excel/04_CaR筛选器对照.xlsx",
+      "source": "SyntheticData/CaRTry/outputs/car_selector_validation/car_selector_results.xlsx",
+      "sha256": "d67b257acb2b632b480867337e2a7749b679234d3588d73a27ad354dfb536dd7"
+    },
+    {
+      "key": "verifier",
+      "copy": "关键Excel/05_Verifier下游验证.xlsx",
+      "source": "SyntheticData/cross_verifier/outputs/cross_verifier_summary.xlsx",
+      "sha256": "0b515779b27382236b005c9148cd716301c4f0c31d068d1d119af1e18fb841de"
+    },
+    {
+      "key": "dsir",
+      "copy": "关键Excel/06_原始DSIR对照.xlsx",
+      "source": "SyntheticData/DisrTry/outputs/dsir_selector_validation/dsir_selector_results.xlsx",
+      "sha256": "d5a83c4dae9c54bacbdfce27831a2cc400bd4fcb56d6f8f5efafdbdf8d025285"
+    }
+  ],
+  "notes": [
+    "CaR Main_Comparison has Original DSIR N=0 and LN-DSIR N=80. Figure 04 takes DSIR/LN from the original 25-run LN workbook; CaR only supplies RA-CaR.",
+    "No final-holdout evaluation or model training was run while building these materials.",
+    "All figures are descriptive. No statistical significance claim is added."
+  ]
+}

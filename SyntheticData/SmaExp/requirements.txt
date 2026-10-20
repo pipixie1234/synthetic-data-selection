@@ -1,0 +1,10 @@
+torch>=2.2
+transformers>=4.45
+datasets>=2.20
+accelerate>=0.33
+sentencepiece>=0.2
+safetensors>=0.4
+scikit-learn>=1.4
+tqdm>=4.66
+# Required for the legacy GPT-Neo 8-bit checkpoint loader.
+bitsandbytes>=0.43
