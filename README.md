@@ -11,9 +11,7 @@ The central question is practical: **when only a fixed number of examples can be
 - Cross-verifier selection improved over random selection in one fixed candidate pool, and exceeded self-verification in four of five paired model seeds. It still did **not** beat Real-Anchored TopK on mean macro-F1 (**72.92% vs. 73.57%**). Under the project's pre-defined interpretation rule, this is not useful evidence for replacing TopK or adding more verifier complexity.
 - Several alternatives produced useful mechanism diagnostics without showing a downstream advantage: length-normalized DSIR largely relieved weight concentration, while DSIR, clustering-based CaR, adaptive TopK, and coarse source quotas did not consistently exceed TopK.
 
-The detailed Chinese project summary and a short discussion outline for faculty meetings are in [`成果/`](成果/).
-
-Presentation materials are available in [`成果/图表使用说明.md`](成果/图表使用说明.md): six figures in PNG/SVG, a workbook with editable charts, six source workbooks, and a seven-slide PowerPoint draft. Rebuild them with `python tools/build_research_presentation.py` after installing `requirements-presentation.txt`. Upload scope is documented in [`成果/GitHub上传范围.md`](成果/GitHub上传范围.md).
+Personal application summaries, faculty discussion notes, and generated presentation materials are kept locally under `成果/`, which is excluded from version control. To generate presentation materials from the locally available experiment outputs, install `requirements-presentation.txt` and run `python tools/build_research_presentation.py`.
 
 ## Repository map
 

@@ -1,6 +1,7 @@
 # Local checkpoints, caches, and generated experiment artifacts
 cloud/model/
 /CaR-main/
+/成果/
 **/.venv/
 **/venv/
 **/__pycache__/
